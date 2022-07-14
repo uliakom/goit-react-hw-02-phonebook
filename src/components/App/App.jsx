@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import shortid from 'shortid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Container, Title, SubTitle } from './App.styled';
-import ContactForm from './ContactForm';
-import PhoneBook from 'PhoneBook';
-import Filter from './Filter';
+import ContactForm from 'components/ContactForm';
+import PhoneBook from 'components/PhoneBook';
+import Filter from 'components/Filter';
 
-export class App extends Component {
+class App extends Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -39,9 +39,9 @@ export class App extends Component {
     }));
   };
 
-  deleteContact = deletedId => {
+  deleteContact = id => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== deletedId),
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
     }));
   };
 
@@ -51,7 +51,7 @@ export class App extends Component {
 
   filterContacts = () => {
     const { filter, contacts } = this.state;
-    const normalizedFilter = filter.toLocaleLowerCase();
+    const normalizedFilter = filter.toLowerCase();
     const visibleContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
@@ -74,3 +74,5 @@ export class App extends Component {
     );
   }
 }
+
+export default App;
